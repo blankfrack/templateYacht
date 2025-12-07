@@ -1,0 +1,51 @@
+{
+  "version": "1",
+  "templates": [
+    {
+      "title": "Redis",
+      "description": "Cache Redis pour applications Java",
+      "categories": ["cache", "database"],
+      "image": "redis:7",
+      "ports": ["6379:6379"],
+      "env": [],
+      "volumes": [],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "title": "PostgreSQL",
+      "description": "PostgreSQL + volume persistant",
+      "categories": ["database"],
+      "image": "postgres:16",
+      "ports": ["5432:5432"],
+      "env": [
+        "POSTGRES_USER=dev",
+        "POSTGRES_PASSWORD=dev",
+        "POSTGRES_DB=appdb"
+      ],
+      "volumes": [
+        "pgdata:/var/lib/postgresql/data"
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "title": "Adminer",
+      "description": "UI Web pour bases SQL",
+      "categories": ["database", "tools"],
+      "image": "adminer:latest",
+      "ports": ["8084:8080"],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "title": "Meilisearch",
+      "description": "Moteur de recherche rapide",
+      "categories": ["search"],
+      "image": "getmeili/meilisearch:latest",
+      "ports": ["7700:7700"],
+      "env": ["MEILI_ENV=development"],
+      "restart_policy": "unless-stopped"
+    }
+  ]
+}
